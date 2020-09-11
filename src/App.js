@@ -9,25 +9,28 @@ function App() {
 
   useEffect(() => {
 
-    // const data = {
-    //   apiOperation: 'CREATE_CHECKOUT_SESSION',
-    //   interaction: {
-    //     operation: 'PURCHASE'
-    //   },
-    //   order: {
-    //     id: 'jxubiusssDIznx',
-    //     amount: '100.00',
-    //     currency: 'USD'
-    //   }
-    // }
-    // axios.post('https://test-gateway.mastercard.com/api/rest/version/57/merchant/INVL33120005/session', data, {
-    //   headers: {
-    //     'Authorization': `Basic ${btoa(`merchant.INVL33120005:75f62627417ab8361decdc4a8d3601ec`)}`
-    //   }
-    // })
-    //   .then(res => {
-    //     if(res.data.session) {
+    const data = {
+      apiOperation: 'CREATE_CHECKOUT_SESSION',
+      interaction: {
+        operation: 'PURCHASE'
+      },
+      order: {
+        id: 'jxubiusssDIznx',
+        amount: '100.00',
+        currency: 'USD'
+      }
+    }
+    axios.post('https://test-gateway.mastercard.com/api/rest/version/57/merchant/INVL33120005/session', data, {
+      headers: {
+        'Authorization': `Basic ${btoa(`merchant.INVL33120005:75f62627417ab8361decdc4a8d3601ec`)}`
+      }
+    })
+      .then(res => {
+        if(res.data.session) {
           Checkout.configure({
+            session: {
+              id: res.data.session.id
+            },
             merchant: 'INVL33120005',
                 order: {
                     amount: 50,
@@ -55,8 +58,8 @@ function App() {
                         shipping        : 'HIDE'
                     }
                 }
-          // })
-        // }
+          })
+        }
       })
   },[])
   const handleClick = () => {
