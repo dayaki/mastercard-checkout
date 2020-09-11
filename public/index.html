@@ -15,6 +15,18 @@
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <script src="https://test-gateway.mastercard.com/checkout/version/57/checkout.js" data-error="errorCallback" data-cancel="cancelCallback" data-complete="successCallback"></script>
+    <script type="text/javascript">
+        function errorCallback(error) {
+                  console.log(JSON.stringify(error));
+            }
+        function cancelCallback() {
+              console.log('Payment cancelled');
+        }
+        function successCallback() {
+          window.location.href = "http://localhost:3000"
+        }
+    </script>
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
